@@ -1,4 +1,4 @@
-import { IStudent } from "./student"
+import { IStudent } from "./IStudent"
 
 export interface IGroup {
     id: number

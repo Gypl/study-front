@@ -1,0 +1,58 @@
+<p>student-overview works!</p>
+<h1>Список студентов</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addStudent()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Имя</td>
+            <td>Возраст</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of students">
+            <ng-template [ngTemplateOutlet]="loadTemplate(student)" 
+                        [ngTemplateOutletContext]="{ $implicit: student}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+<div>{{statusMessage}}</div>
+    
+    
+<!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-student>
+    <td>{{student._id}}</td>
+    <td>{{student.name}}</td>
+    <td>{{student.age}}</td>
+    <td>
+        <input type="button" value="Изменить" class="btn btn-default" (click)="editStudent(student)" />
+    </td>
+    <td>
+        <input type="button" value="Удалить" (click)="deleteStudent(student)" class="btn btn-danger" />
+    </td>
+</ng-template>
+   
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <td>
+        <input type="number" [(ngModel)]="editedStudent.id" readonly disabled class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedStudent.name" class="form-control" />
+    </td>
+    <td>
+        <input type="date" [(ngModel)]="editedStudent.birthday" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="editedStudent.number" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveStudent()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>
