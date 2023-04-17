@@ -17,7 +17,7 @@ export class StudentOverviewComponent implements OnInit {
   @ViewChild('editTemplate', { static: false })
   editTemplate!: TemplateRef<any> | null;
 
-  public editedStudent: IStudent = new Student(-1, "", new Date, 0)
+  public editedStudent: IStudent = new Student(0, "", new Date, 0)
   students: Array<Student>
   isNewRecord: boolean = false
   statusMessage: string = ""
@@ -39,7 +39,7 @@ export class StudentOverviewComponent implements OnInit {
 
   // добавление пользователя
   addStudent() {
-    this.editedStudent = new Student(-1, "", new Date, 0);
+    this.editedStudent = new Student(0, "", new Date, 0);
     this.students.push(this.editedStudent);
     this.isNewRecord = true;
 }
@@ -65,14 +65,14 @@ saveStudent() {
             this.loadStudents();
         });
         this.isNewRecord = false;
-        this.editedStudent = new Student(-1, "", new Date, 0);
+        this.editedStudent = new Student(0, "", new Date, 0);
     } else {
         // изменяем пользователя
         this.serv.updateStudent(this.editedStudent as Student).subscribe(_ => {
             this.statusMessage = 'Данные успешно обновлены',
             this.loadStudents();
         });
-        this.editedStudent = new Student(-1, "", new Date, 0);
+        this.editedStudent = new Student(0, "", new Date, 0);
     }
 }
 // отмена редактирования
@@ -82,7 +82,7 @@ cancel() {
         this.students.pop();
         this.isNewRecord = false;
     }
-    this.editedStudent = new Student(-1, "", new Date, 0);
+    this.editedStudent = new Student(0, "", new Date, 0);
 }
 // удаление пользователя
 deleteStudent(student: Student) {

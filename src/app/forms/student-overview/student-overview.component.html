@@ -6,8 +6,8 @@
         <tr>
             <td>Id</td>
             <td>Имя</td>
-            <td>Возраст</td>
-            <td></td>
+            <td>День рождения</td>
+            <td>Студенческий номер</td>
             <td></td>
         </tr>
     </thead>
@@ -24,9 +24,10 @@
     
 <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-student>
-    <td>{{student._id}}</td>
+    <td>{{student.id}}</td>
     <td>{{student.name}}</td>
-    <td>{{student.age}}</td>
+    <td>{{student.birthday}}</td>
+    <td>{{student.number}}</td>
     <td>
         <input type="button" value="Изменить" class="btn btn-default" (click)="editStudent(student)" />
     </td>
