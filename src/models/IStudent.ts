@@ -1,6 +1,6 @@
 export interface IStudent {
     id: number
     name: string
-    birthday: Date
+    birthdate: Date
     number: number
 }

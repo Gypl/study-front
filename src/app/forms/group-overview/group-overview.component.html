@@ -1,25 +1,24 @@
-<h1>Список студентов</h1>
+<h1>Список групп</h1>
 <input
   type="button"
   value="Добавить"
   class="btn btn-default"
-  (click)="addStudent()"
+  (click)="addGroup()"
 />
 <div class="table-responsive" style="max-width: 1100px; min-width: 1000px; overflow-x:auto;">
   <table class="table table-striped">
     <thead>
       <tr>
         <td>Id</td>
-        <td>Имя</td>
-        <td>День рождения</td>
-        <td>Студенческий номер</td>
+        <td>Название</td>
+        <td>Студенты</td>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let group of groups">
         <ng-template
-          [ngTemplateOutlet]="loadTemplate(student)"
-          [ngTemplateOutletContext]="{ $implicit: student }"
+          [ngTemplateOutlet]="loadTemplate(group)"
+          [ngTemplateOutletContext]="{ $implicit: group }"
         >
         </ng-template>
       </tr>
@@ -29,17 +28,16 @@
 </div>
 
 <!--шаблон для чтения-->
-<ng-template #readOnlyTemplate let-student>
-  <td>{{ student.id }}</td>
-  <td>{{ student.name }}</td>
-  <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
-  <td>{{ student.number }}</td>
+<ng-template #readOnlyTemplate let-group>
+  <td>{{ group.id }}</td>
+  <td>{{ group.name }}</td>
+  <td>{{ group.students }}</td>
   <td>
     <input
       type="button"
       value="Изменить"
       class="btn btn-default"
-      (click)="editStudent(student)"
+      (click)="editGroup(group)"
       style="max-width: 120px;"
     />
   </td>
@@ -47,7 +45,7 @@
     <input
       type="button"
       value="Удалить"
-      (click)="deleteStudent(student)"
+      (click)="deleteGroup(group)"
       class="btn btn-danger"
       style="max-width: 120px;"
     />
@@ -59,34 +57,23 @@
   <td>
     <input
       type="number"
-      [(ngModel)]="editedStudent.id"
+      [(ngModel)]="editedGroup.id"
       readonly
       disabled
       class="form-control"
     />
   </td>
   <td>
-    <input type="text" [(ngModel)]="editedStudent.name" class="form-control" />
+    <input type="text" [(ngModel)]="editedGroup.name" class="form-control" />
   </td>
   <td>
-    <input
-      type="date"
-      [(ngModel)]="editedStudent.birthdate"
-      class="form-control"
-    />
-  </td>
-  <td>
-    <input
-      type="number"
-      [(ngModel)]="editedStudent.number"
-      class="form-control"
-    />
+    <input type="text" [(ngModel)]="editedGroup.students" class="form-control" />
   </td>
   <td>
     <input
       type="button"
       value="Сохранить"
-      (click)="saveStudent()"
+      (click)="saveGroup()"
       class="btn btn-success"
     />
   </td>

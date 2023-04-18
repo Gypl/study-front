@@ -5,7 +5,7 @@ import {IGroup} from 'src/models/IGroup';
 @Injectable()
 export class GroupService{
      
-    private url = "http://localhost:3000/api/groups";
+    private url = "http://localhost:8080/api/groups";
     constructor(private http: HttpClient){ }
         
     getGroups(){
@@ -14,14 +14,14 @@ export class GroupService{
     
     createGroup(group: IGroup){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.post<IGroup>(this.url, JSON.stringify(group), {headers: myHeaders}); 
+        return this.http.post<IGroup>(this.url + '/create', JSON.stringify(group), {headers: myHeaders}); 
     }
     updateGroup(group: IGroup) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.put<IGroup>(this.url, JSON.stringify(group), {headers:myHeaders});
+        return this.http.put<IGroup>(this.url + '/update/' + group.id, JSON.stringify(group), {headers:myHeaders});
     }
-    deleteGroup(id: string){
+    deleteGroup(id: number){
      
-        return this.http.delete<IGroup>(this.url + '/' + id);
+        return this.http.delete<IGroup>(this.url + '/delete/' + id);
     }
 }
