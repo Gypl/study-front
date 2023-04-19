@@ -68,7 +68,8 @@
               "browserTarget": "study-front:build:production"
             },
             "development": {
-              "browserTarget": "study-front:build:development"
+              "browserTarget": "study-front:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
