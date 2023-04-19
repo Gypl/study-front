@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
   }
 
   login() {
-    let url = '/api/login';
+    let url = 'http://localhost:8080/api/login';
     this.http.post<any>(url, {
       username: this.model.username,
       password: this.model.password
