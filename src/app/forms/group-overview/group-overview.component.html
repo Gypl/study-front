@@ -31,7 +31,6 @@
 <ng-template #readOnlyTemplate let-group>
   <td>{{ group.id }}</td>
   <td>{{ group.name }}</td>
-  <td>{{ group.students }}</td>
   <td>
     <input
       type="button"
@@ -65,9 +64,6 @@
   </td>
   <td>
     <input type="text" [(ngModel)]="editedGroup.name" class="form-control" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="editedGroup.students" class="form-control" />
   </td>
   <td>
     <input
