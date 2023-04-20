@@ -9,9 +9,9 @@ import { AuthenticationGuard } from './security/authentication.guard';
 const routes: Routes = [
   {
     path: '', canActivate: [AuthenticationGuard], children: [
+      { path: 'groups', component: GroupOverviewComponent },
       { path: 'students', component: StudentOverviewComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'groups', component: GroupOverviewComponent },
       { path: '', redirectTo: '/students', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]

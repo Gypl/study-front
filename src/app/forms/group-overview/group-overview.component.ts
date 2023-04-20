@@ -7,7 +7,8 @@ import { Student } from 'src/models/entityes/student';
 @Component({
   selector: 'app-group-overview',
   templateUrl: './group-overview.component.html',
-  styleUrls: ['./group-overview.component.scss']
+  styleUrls: ['./group-overview.component.scss'],
+  providers: [GroupService]
 })
 export class GroupOverviewComponent  implements OnInit {
   //типы шаблонов
@@ -16,7 +17,7 @@ export class GroupOverviewComponent  implements OnInit {
   @ViewChild('editTemplate', { static: false })
   editTemplate!: TemplateRef<any> | null;
 
-  public editedGroup: Group = new Group(0, "", new Array<Student>)
+  public editedGroup: Group = new Group(0, "", [])
   groups: Array<Group>
   isNewRecord: boolean = false
   statusMessage: string = ""
@@ -38,7 +39,7 @@ export class GroupOverviewComponent  implements OnInit {
 
   // добавление группы
   addGroup() {
-    this.editedGroup = new Group(0, "", new Array<Student>);
+    this.editedGroup = new Group(0, "", []);
     if (this.isNewRecord === false)
         this.groups.push(this.editedGroup);
     this.isNewRecord = true;
@@ -65,14 +66,14 @@ saveGroup() {
             this.loadGroups();
         });
         this.isNewRecord = false;
-        this.editedGroup = new Group(0, "", new Array<Student>);
+        this.editedGroup = new Group(0, "", []);
     } else {
         // изменяем группы
         this.serv.updateGroup(this.editedGroup as Group).subscribe(_ => {
             this.statusMessage = 'Данные успешно обновлены',
             this.loadGroups();
         });
-        this.editedGroup = new Group(0, "", new Array<Student>);
+        this.editedGroup = new Group(0, "", []);
     }
 }
 // отмена редактирования
@@ -82,7 +83,7 @@ cancel() {
         this.groups.pop();
         this.isNewRecord = false;
     }
-    this.editedGroup = new Group(0, "", new Array<Student>);
+    this.editedGroup = new Group(0, "", []);
 }
 // удаление группы
 deleteGroup(group: Group) {
