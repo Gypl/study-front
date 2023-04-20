@@ -26,7 +26,7 @@ export class GroupService{
      
         return this.http.delete<Group>(this.url + '/delete/' + id);
     }
-    getGroupById(){
+    getGroupById(id_: number){
         return this.http.get<Group>(this.url + '/id/' + this.chosenGroupId);
     }
     moveStudent(studentId: number){

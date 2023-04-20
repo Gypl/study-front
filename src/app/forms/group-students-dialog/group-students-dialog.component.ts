@@ -24,6 +24,7 @@ export class GroupStudentsDialogComponent implements OnInit {
   public editedGroup: Group = new Group(0, "", [])
   public editedStudent: Student = new Student(0, "", new Date(), 0)
   students: Array<Student>
+  allStudents: Array<Student>
   isNewRecord: boolean = false
   statusMessage: string = ""
   chosenGroupId: number = -1
@@ -32,7 +33,8 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   constructor(private serv: GroupService) {
     this.students = new Array<Student>()
-    this.serv.getGroupById().subscribe((data: Group) => {
+    this.allStudents = new Array<Student>()
+    this.serv.getGroupById(this.chosenGroupId).subscribe((data: Group) => {
       this.editedGroup = data
     })
   }
@@ -43,7 +45,7 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   //Загрузка студентов
   private loadStudents() {
-    this.serv.getGroupById().subscribe((data: Group) => {
+    this.serv.getGroupById(this.chosenGroupId).subscribe((data: Group) => {
       this.students = data.students
     })
   }
