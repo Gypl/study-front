@@ -1,9 +1,13 @@
-import {TemplateRef, ViewChild} from '@angular/core';
-import { Component, OnInit} from '@angular/core';
+import { TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GroupService } from 'src/app/services/group.service';
 import { Group } from 'src/models/entityes/group';
 import { Student } from 'src/models/entityes/student';
 
+export interface DialogData {
+    chosenGroupId: number;
+    chosenStudentId: number;
+  }
 @Component({
   selector: 'app-group-overview',
   templateUrl: './group-overview.component.html',
@@ -17,10 +21,14 @@ export class GroupOverviewComponent  implements OnInit {
   @ViewChild('editTemplate', { static: false })
   editTemplate!: TemplateRef<any> | null;
 
+  @Input()
+  chosenGroupId: number = -1;
+
   public editedGroup: Group = new Group(0, "", [])
   groups: Array<Group>
   isNewRecord: boolean = false
   statusMessage: string = ""
+  chosenStudentId: number = -1
   
   constructor(private serv: GroupService) {
     this.groups = new Array<Group>()
@@ -37,6 +45,10 @@ export class GroupOverviewComponent  implements OnInit {
     })
   }
 
+  choseStudentOnClick(){
+
+  }
+
   // добавление группы
   addGroup() {
     this.editedGroup = new Group(0, "", []);
@@ -51,6 +63,14 @@ editGroup(group: Group) {
 }
 // загружаем один из двух шаблонов
 loadTemplate(group: Group) {
+    if (this.editedGroup && this.editedGroup.id === group.id) {
+        return this.editTemplate;
+    } else {
+        return this.readOnlyTemplate;
+    }
+}
+// загружаем один из двух шаблонов
+loadStudentsTemplate(group: Group) {
     if (this.editedGroup && this.editedGroup.id === group.id) {
         return this.editTemplate;
     } else {

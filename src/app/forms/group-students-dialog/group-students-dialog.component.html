@@ -1,10 +1,3 @@
-<h1>Список групп</h1>
-<input
-  type="button"
-  value="Добавить"
-  class="btn btn-default"
-  (click)="addGroup()"
-/>
 <div
   class="table-responsive"
   style="max-width: 1100px; min-width: 1000px; overflow-x: auto"
@@ -13,15 +6,16 @@
     <thead>
       <tr>
         <td>Id</td>
-        <td>Название</td>
-        <td>Студенты</td>
+        <td>Имя</td>
+        <td>День рождения</td>
+        <td>Студенческий номер</td>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let group of groups">
+      <tr *ngFor="let student of students">
         <ng-template
-          [ngTemplateOutlet]="loadTemplate(group)"
-          [ngTemplateOutletContext]="{ $implicit: group }"
+          [ngTemplateOutlet]="loadStudentsTemplate(student)"
+          [ngTemplateOutletContext]="{ $implicit: student }"
         >
         </ng-template>
       </tr>
@@ -29,46 +23,34 @@
   </table>
   <div>{{ statusMessage }}</div>
 </div>
-
 <!--шаблон для чтения-->
-<ng-template #readOnlyTemplate let-group>
-  <td>{{ group.id }}</td>
-  <td>{{ group.name }}</td>
-  <td>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <td>Id</td>
-          <td>Имя</td>
-          <td>День рождения</td>
-          <td>Студенческий номер</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let student of group.students">
-          <td>{{ student.id }}</td>
-          <td>{{ student.name }}</td>
-          <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
-          <td>{{ student.number }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </td>
+<ng-template #readOnlyTemplate let-student>
+  <td>{{ student.id }}</td>
+  <td>{{ student.name }}</td>
+  <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
+  <td>{{ student.number }}</td>
   <td>
     <input
-      routerLink="/groups/edit"
       type="button"
       value="Изменить"
       class="btn btn-default"
       style="max-width: 120px"
     />
   </td>
+</ng-template>
+
+<!--шаблон для чтения 2-->
+<ng-template #readOnlyTemplate2 let-student>
+  <td>{{ student.id }}</td>
+  <td>{{ student.name }}</td>
+  <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
+  <td>{{ student.number }}</td>
   <td>
     <input
       type="button"
-      value="Удалить"
-      (click)="deleteGroup(group)"
-      class="btn btn-danger"
+      value="Добвавить в группу"
+      class="btn btn-default"
+      (click)="moveStudentToUs(student.id)"
       style="max-width: 120px"
     />
   </td>
@@ -105,3 +87,18 @@
     />
   </td>
 </ng-template>
+
+<span>
+  <input
+    type="button"
+    value="Отмена"
+    (click)="cancel()"
+    class="btn btn-warning"
+  />
+  <input
+    type="button"
+    value="Сохранить"
+    (click)="saveGroup()"
+    class="btn btn-success"
+  />
+</span>

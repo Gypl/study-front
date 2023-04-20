@@ -12,6 +12,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { RequestInterceptor } from './security/request.interceptor';
+import { GroupStudentsDialogComponent } from './forms/group-students-dialog/group-students-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RequestInterceptor } from './security/request.interceptor';
     GroupOverviewComponent,
     NavBarComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    GroupStudentsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { RequestInterceptor } from './security/request.interceptor';
     NgbModule,
     FormsModule,
     CommonModule, 
-    HttpClientModule
+    HttpClientModule, BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]
