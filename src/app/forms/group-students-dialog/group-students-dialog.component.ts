@@ -64,7 +64,6 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   // Переместить студента
   moveStudentToUs(studentId: number) {
-
     this.serv.moveStudent(this.serv.getId(), studentId).subscribe(_ => {
       this.statusMessage = 'Студент успешно переведён',
         this.loadStudents();
