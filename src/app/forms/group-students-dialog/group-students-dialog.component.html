@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let student of allStudents">
         <ng-template
           [ngTemplateOutlet]="loadStudentsTemplate(student)"
           [ngTemplateOutletContext]="{ $implicit: student }"
@@ -29,18 +29,11 @@
   <td>{{ student.name }}</td>
   <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
   <td>{{ student.number }}</td>
-  <td>
-    <input
-      type="button"
-      value="Изменить"
-      class="btn btn-default"
-      style="max-width: 120px"
-    />
-  </td>
+  <td></td>
 </ng-template>
 
 <!--шаблон для чтения 2-->
-<ng-template #readOnlyTemplate2 let-student>
+<ng-template #studentAddingTemplate let-student>
   <td>{{ student.id }}</td>
   <td>{{ student.name }}</td>
   <td>{{ student.birthdate | date : "dd.MM.yyyy" }}</td>
@@ -49,7 +42,7 @@
     <input
       type="button"
       value="Добвавить в группу"
-      class="btn btn-default"
+      class="btn btn-success"
       (click)="moveStudentToUs(student.id)"
       style="max-width: 120px"
     />
@@ -90,12 +83,14 @@
 
 <span>
   <input
+    routerLink="/groups"
     type="button"
     value="Отмена"
     (click)="cancel()"
     class="btn btn-warning"
   />
   <input
+    routerLink="/groups"
     type="button"
     value="Сохранить"
     (click)="saveGroup()"

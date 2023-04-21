@@ -4,9 +4,13 @@ import { GroupService } from 'src/app/services/group.service';
 import { Group } from 'src/models/entityes/group';
 import { Student } from 'src/models/entityes/student';
 
-export interface DialogData {
+export class DialogData {
     chosenGroupId: number;
     chosenStudentId: number;
+    public constructor (grid: number, stid: number) {
+        this.chosenGroupId = grid;
+        this.chosenStudentId =stid;
+    }
 }
 @Component({
     selector: 'app-group-overview',
@@ -21,7 +25,7 @@ export class GroupOverviewComponent implements OnInit {
     @ViewChild('editTemplate', { static: false })
     editTemplate!: TemplateRef<any> | null;
 
-    @Input()
+
     chosenGroupId: number = -1;
 
     public editedGroup: Group = new Group(0, "", [])
@@ -29,6 +33,7 @@ export class GroupOverviewComponent implements OnInit {
     isNewRecord: boolean = false
     statusMessage: string = ""
     chosenStudentId: number = -1
+
 
     constructor(private serv: GroupService) {
         this.groups = new Array<Group>()

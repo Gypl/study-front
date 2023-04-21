@@ -70,7 +70,7 @@
             },
             "development": {
               "browserTarget": "study-front:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
