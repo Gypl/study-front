@@ -52,8 +52,7 @@ export class GroupOverviewComponent implements OnInit {
     }
 
     setChosenGroupId(groupId: number) {
-        this.serv.chosenGroupId = groupId
-        console.log(this.serv.chosenGroupId)
+        this.serv.setId(groupId)
     }
 
     // добавление группы

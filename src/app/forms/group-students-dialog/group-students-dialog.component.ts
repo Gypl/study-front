@@ -19,9 +19,6 @@ export class GroupStudentsDialogComponent implements OnInit {
   @ViewChild('studentAddingTemplate', { static: false })
   studentAddingTemplate!: TemplateRef<any> | null;
 
-  @Input() chosenGroupId: number = -1
-  @Input() chosenStudentId: number = -1
-
   public editedGroup: Group = new Group(0, "", [])
   public editedStudent: Student = new Student(0, "", new Date(), 0)
   groupStudents: Array<Student>
@@ -43,7 +40,7 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   //Загрузка студентов
   private loadStudents() {
-    this.serv.getGroupById(this.chosenGroupId).subscribe((data: Group) => {
+    this.serv.getGroupById(this.serv.getId()).subscribe((data: Group) => {
       this.editedGroup = data
       this.groupStudents = data.students
     })
@@ -68,7 +65,7 @@ export class GroupStudentsDialogComponent implements OnInit {
   // Переместить студента
   moveStudentToUs(studentId: number) {
 
-    this.serv.moveStudent(this.serv.chosenGroupId, studentId).subscribe(_ => {
+    this.serv.moveStudent(this.serv.getId(), studentId).subscribe(_ => {
       this.statusMessage = 'Студент успешно переведён',
         this.loadStudents();
     });

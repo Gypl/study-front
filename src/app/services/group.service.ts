@@ -7,7 +7,7 @@ import { Group } from 'src/models/entityes/group';
 export class GroupService{
      
     private url = "http://localhost:8080/api/groups";
-    public chosenGroupId: number = -1;
+    private chosenGroupId: number = 0;
     constructor(private http: HttpClient){ }
         
     getGroups(){
@@ -26,8 +26,6 @@ export class GroupService{
         return this.http.delete<Group>(this.url + '/delete/' + id);
     }
     getGroupById(id_: number){
-        console.log(id_)
-        console.log(this.chosenGroupId)
         return this.http.get<Group>(this.url + '/id/' + this.chosenGroupId);
     }
     moveStudent(id_: number, studentId: number){
