@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RequestInterceptor } from './security/request.interceptor';
 import { GroupStudentsDialogComponent } from './forms/group-students-dialog/group-students-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GroupService } from './services/group.service';
+import { StudentService } from './services/student.service';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    CommonModule, 
+    CommonModule,
     HttpClientModule, BrowserAnimationsModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  providers: [GroupService, StudentService, { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

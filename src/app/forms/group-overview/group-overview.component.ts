@@ -9,14 +9,13 @@ export class DialogData {
     chosenStudentId: number;
     public constructor (grid: number, stid: number) {
         this.chosenGroupId = grid;
-        this.chosenStudentId =stid;
+        this.chosenStudentId = stid;
     }
 }
 @Component({
     selector: 'app-group-overview',
     templateUrl: './group-overview.component.html',
-    styleUrls: ['./group-overview.component.scss'],
-    providers: [GroupService]
+    styleUrls: ['./group-overview.component.scss']
 })
 export class GroupOverviewComponent implements OnInit {
     //типы шаблонов
@@ -25,8 +24,6 @@ export class GroupOverviewComponent implements OnInit {
     @ViewChild('editTemplate', { static: false })
     editTemplate!: TemplateRef<any> | null;
 
-
-    chosenGroupId: number = -1;
 
     public editedGroup: Group = new Group(0, "", [])
     groups: Array<Group>
@@ -55,7 +52,8 @@ export class GroupOverviewComponent implements OnInit {
     }
 
     setChosenGroupId(groupId: number) {
-        this.serv.setId(groupId)
+        this.serv.chosenGroupId = groupId
+        console.log(this.serv.chosenGroupId)
     }
 
     // добавление группы

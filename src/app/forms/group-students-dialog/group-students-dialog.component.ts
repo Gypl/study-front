@@ -10,8 +10,7 @@ import { StudentService } from 'src/app/services/student.service';
 @Component({
   selector: 'app-group-students-dialog',
   templateUrl: './group-students-dialog.component.html',
-  styleUrls: ['./group-students-dialog.component.scss'],
-  providers: [GroupService, StudentService]
+  styleUrls: ['./group-students-dialog.component.scss']
 })
 export class GroupStudentsDialogComponent implements OnInit {
   //типы шаблонов
@@ -20,7 +19,7 @@ export class GroupStudentsDialogComponent implements OnInit {
   @ViewChild('studentAddingTemplate', { static: false })
   studentAddingTemplate!: TemplateRef<any> | null;
 
-  @Input() chosenGroupId: number = 1
+  @Input() chosenGroupId: number = -1
   @Input() chosenStudentId: number = -1
 
   public editedGroup: Group = new Group(0, "", [])
@@ -39,6 +38,7 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   ngOnInit() {
     this.loadStudents()
+    console.log(this.serv.getId())
   }
 
   //Загрузка студентов
@@ -67,7 +67,8 @@ export class GroupStudentsDialogComponent implements OnInit {
 
   // Переместить студента
   moveStudentToUs(studentId: number) {
-    this.serv.moveStudent(this.chosenGroupId, studentId).subscribe(_ => {
+
+    this.serv.moveStudent(this.serv.chosenGroupId, studentId).subscribe(_ => {
       this.statusMessage = 'Студент успешно переведён',
         this.loadStudents();
     });
