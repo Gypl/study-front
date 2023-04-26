@@ -1,0 +1,46 @@
+<div
+  class="relative flex flex-col items-center justify-center h-screen overflow-hidden"
+>
+  <div
+    class="w-full p-6 bg-base-200 border-t-4 border-neutral rounded-md shadow-md border-top lg:max-w-lg"
+  >
+    <h1 class="text-3xl font-semibold text-center text-gray-700">
+      Аутентификация
+    </h1>
+    <form
+      class="space-y-4"
+      [formGroup]="authForm"
+      (ngSubmit)="loginSubmit()"
+
+    >
+      <div>
+        <label class="label">
+          <span class="text-base label-text">Логин</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Введите логин"
+          class="w-full input input-bordered"
+          formControlName="username"
+        />
+      </div>
+      <div>
+        <label class="label">
+          <span class="text-base label-text">Пароль</span>
+        </label>
+        <input
+          type="password"
+          placeholder="Введите пароль"
+          class="w-full input input-bordered"
+          formControlName="password"
+        />
+      </div>
+      <div class="flex justify-between gap-1">
+        <button type="button"class="btn flex-1" (click)="registerSubmit()">
+          Зарегистрироваться
+        </button>
+        <button type="submit" class="btn btn-primary flex-1">Войти</button>
+      </div>
+    </form>
+  </div>
+</div>

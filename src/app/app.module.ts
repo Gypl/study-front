@@ -11,11 +11,12 @@ import { GroupOverviewComponent } from './forms/group-overview/group-overview.co
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
-import { RequestInterceptor } from './security/request.interceptor';
 import { GroupStudentsDialogComponent } from './forms/group-students-dialog/group-students-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GroupService } from './services/group.service';
 import { StudentService } from './services/student.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { BasicAuthInterceptor } from './security/basic-auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StudentService } from './services/student.service';
     NavBarComponent,
     PageNotFoundComponent,
     LoginComponent,
-    GroupStudentsDialogComponent
+    GroupStudentsDialogComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { StudentService } from './services/student.service';
     CommonModule,
     HttpClientModule, BrowserAnimationsModule
   ],
-  providers: [GroupService, StudentService, { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  providers: [GroupService, StudentService, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
