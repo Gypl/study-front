@@ -5,19 +5,19 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { GroupOverviewComponent } from './forms/group-overview/group-overview.component';
 import { GroupStudentsDialogComponent } from './forms/group-students-dialog/group-students-dialog.component';
 import { StudentOverviewComponent } from './forms/student-overview/student-overview.component';
-import { AuthenticationGuard } from './security/authentication.guard';
+import { AuthGuard } from './security/auth.guard';
 
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthenticationGuard], children: [
+    path: '', canActivate: [AuthGuard], children: [
       { path: 'groups/edit', component: GroupStudentsDialogComponent },
       { path: 'groups', component: GroupOverviewComponent },
       { path: 'students', component: StudentOverviewComponent },
-      { path: 'login', component: LoginComponent },
       { path: '', redirectTo: '/students', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
-  }
+  },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
