@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AllertService } from 'src/app/services/allert.service';
+import { User } from 'src/models/entityes/user';
+import { UserRole } from 'src/models/entityes/user-role';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -25,7 +28,7 @@ export class UserSessionService {
       next: (val) => {
         this._user.roles = val;
         this._isLoggedIn = true;
-        this.router.navigate(["/dashboard"])
+        this.router.navigate(["/groups"])
       },
       error: (err) => this.allertService.showError("Ошибка авторизации"),
     });

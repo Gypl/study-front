@@ -17,6 +17,7 @@ import { GroupService } from './services/group.service';
 import { StudentService } from './services/student.service';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { BasicAuthInterceptor } from './security/basic-auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { BasicAuthInterceptor } from './security/basic-auth.interceptor';
     NgbModule,
     FormsModule,
     CommonModule,
-    HttpClientModule, BrowserAnimationsModule
+    ReactiveFormsModule,
+    HttpClientModule, 
+    BrowserAnimationsModule
   ],
   providers: [GroupService, StudentService, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
